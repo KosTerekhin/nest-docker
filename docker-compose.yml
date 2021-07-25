@@ -10,10 +10,8 @@ services:
       - ./api:/app
       - /app/node_modules
     command: npm run start:debug
-    environment:
-      DATABASE_URL: postgres://user:password@postgres:5432/db
-      NODE_ENV: development
-      PORT: 3000
+    env_file:
+      - ./api/.env
     depends_on:
       - postgres
     ports:
@@ -21,10 +19,8 @@ services:
 
   postgres:
     image: postgres:13
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: db
+    env_file:
+      - ./api/.env
     ports:
       - 35000:5432
 
@@ -35,7 +31,7 @@ services:
       - postgres
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_LISTEN_PORT: 5050
     logging:
       driver: none

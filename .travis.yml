@@ -1,11 +1,9 @@
-language: node_js
-node_js:
-  - '6'
+sudo: required
 services:
-  - postgresql
+  - docker
 cache:
   directories:
-    - node_modules
+    - ./api/node_modules
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
@@ -13,19 +11,19 @@ deploy:
     local_dir: dpl_cd_upload
     skip_cleanup: true
     on: &2
-      repo: organization/reponameHERE
-    bucket: yourBucketNameHERE
-    region: bucketRegionHERE
+      repo: KosTerekhin/nest-docker
+    bucket: deploy-kterekhin
+    region: eu-west-1
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: yourBucketNameHERE
+    bucket: deploy-kterekhin
     key: latest.zip
     bundle_type: zip
-    application: NameOfTheCodeDeployApplicationNameHERE
-    deployment_group: CodeDeployDeploymentGroupNameHERE
-    region: serverRegionHERE
+    application: KDeploy
+    deployment_group: KDeploy
+    region: eu-west-1
     on: *2
 script:
   - zip -r latest *
