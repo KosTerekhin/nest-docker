@@ -4,16 +4,14 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Debug: nest js real time chat",
-      "remoteRoot": "/thomas/src/app",
+      "name": "Debug: nest js",
+      "remoteRoot": "/app",
       "localRoot": "${workspaceFolder}",
       "protocol": "inspector",
       "port": 9229,
       "restart": true,
       "address": "0.0.0.0",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
